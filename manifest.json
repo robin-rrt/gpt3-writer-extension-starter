@@ -1,5 +1,5 @@
 {
-  "name": "Y'er Pirate Summarizer",
+  "name": "Y'er Pirate Summarizer - Pirate-fy",
   "description": "Summarize any text in a Pirate's accent.",
   "version": "1.0",
   "manifest_version": 3,
@@ -11,7 +11,17 @@
   },
   "action": {
     "default_popup": "index.html",
-    "default_title": "Summarize text"
+    "default_title": "Summarize with Pirate-fy"
   },
-  "permissions": ["contextMenus", "tabs", "storage"]
+  "background": {
+    "service_worker": "scripts/contextMenuServiceWorker.js"
+  },
+  "permissions": ["contextMenus", "tabs", "storage"],
+  "host_permissions": ["https://*/*"],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["scripts/content.js"]
+    }
+  ]
 }
